@@ -1,0 +1,10 @@
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\stima\tucil1\App.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\stima\tucil1\Chart.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\stima\tucil1\Main.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\stima\tucil1\convexhull\BaseConvexHullAlgorithm.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\stima\tucil1\convexhull\ConvexHullBruteForce.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\utils\Console.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\utils\Line.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\utils\Pair.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\utils\Point.java
+C:\PROGRAMMING\kuliah-sem4-stima-tucil1\src\com\nafkhanzam\utils\RandomUtils.java

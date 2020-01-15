@@ -1,1 +1,0 @@
-sh gendoc.sh

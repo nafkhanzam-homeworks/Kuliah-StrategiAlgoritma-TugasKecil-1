@@ -1,2 +1,2 @@
 ./compile.sh
-java -cp ./bin/ tubes.Main WITHCOLOR
+java -cp ./bin/ com.nafkhanzam.stima.tucil1.Main
