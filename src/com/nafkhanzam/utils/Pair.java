@@ -46,4 +46,8 @@ public class Pair<A, B> {
 		return true;
 	}
 
+	public Pair<A, B> shallowCopy() {
+		return new Pair<A, B>(a, b);
+	}
+
 }

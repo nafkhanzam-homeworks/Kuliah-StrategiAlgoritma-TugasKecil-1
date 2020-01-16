@@ -15,4 +15,13 @@ public class Point extends Pair<Integer, Integer> {
         return String.format("(%s,%s)", a, b);
     }
 
+    public Point shallowCopy() {
+		return new Point(a, b);
+	}
+
+    public void translate(int a, int b) {
+        this.a += a;
+        this.b += b;
+    }
+
 }
