@@ -13,5 +13,5 @@ public class Console {
     public static void outln() {
         System.out.println();
     }
-    
+
 }

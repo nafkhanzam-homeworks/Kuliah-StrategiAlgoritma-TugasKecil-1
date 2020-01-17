@@ -10,4 +10,9 @@ public class Line extends Pair<Point, Point> {
         return new Line(a, b);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s->%s", a, b);
+    }
+
 }

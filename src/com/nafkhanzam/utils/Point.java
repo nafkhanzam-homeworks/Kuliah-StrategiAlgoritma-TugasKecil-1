@@ -16,7 +16,7 @@ public class Point extends Pair<Integer, Integer> {
     }
 
     public Point shallowCopy() {
-		return new Point(a, b);
+        return new Point(a, b);
 	}
 
     public void translate(int a, int b) {

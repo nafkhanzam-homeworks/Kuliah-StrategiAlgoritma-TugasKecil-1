@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.stream.Collectors;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class App {
 
@@ -27,6 +31,7 @@ public class App {
     private JButton btn;
     private JCheckBox check;
     private Chart chart;
+    private JTextPane outputPane;
 
     public App() {
         _initFrame();
@@ -36,10 +41,10 @@ public class App {
     }
 
     public void randomize(int n) {
-        _timeElapsedText(this.chart.getExecutedTimeInNs(n));
+        _timeElapsedText(this.chart.executeBruteForceAlgorithm(n), this.chart.alg.getComplexityString());
     }
 
-    private void _timeElapsedText(long time) {
+    private void _timeElapsedText(long time, String complexity) {
         boolean ns = true;
         boolean s = false;
         long ns_ms = 1000000;
@@ -52,7 +57,7 @@ public class App {
                 s = true;
             }
         }
-        _setText(String.format("Time elapsed: %d %ss.", time, s ? "" : ns ? "n" : "m"));
+        _setText(String.format("<html>Time complexity: %s<br>Time elapsed: %d %ss.", complexity, time, s ? "" : ns ? "n" : "m"));
     }
 
     private void _errorText(String text) {
@@ -85,6 +90,7 @@ public class App {
                 }
 
                 randomize(n);
+                _printOutput();
             } catch (NumberFormatException e) {
                 _errorText("N must be a number!");
             } catch (Exception e) {
@@ -149,6 +155,77 @@ public class App {
             }
         });
         this.panel.add(this.check);
+
+        JLabel outputLbl = new JLabel("Output:");
+        outputLbl.setBounds(650, 220, 200, 40);
+        this.panel.add(outputLbl);
+
+        this.outputPane = new JTextPane();
+        this.outputPane.setEditable(false);
+        this.outputPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JScrollPane sp = new JScrollPane(this.outputPane);
+        sp.setBounds(650, 260, 100, 350);
+        this.panel.add(sp);
+
+        JLabel outputLbl2 = new JLabel("Computer Specs:");
+        outputLbl2.setBounds(750, 220, 200, 40);
+        this.panel.add(outputLbl2);
+
+        JTextPane specPane = new JTextPane();
+        specPane.setEditable(false);
+        specPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        specPane.setText(_getPrettyComputerSpecs());
+        JScrollPane sp2 = new JScrollPane(specPane);
+        sp2.setBounds(750, 260, 300, 350);
+        this.panel.add(sp2);
+    }
+
+    private String _getPrettyComputerSpecs() {
+        StringBuilder sb = new StringBuilder();
+
+        long kilobytes = 1024;
+        long megabytes = kilobytes * 1024;
+
+        String nameOS = "os.name";
+        String versionOS = "os.version";
+        String architectureOS = "os.arch";
+        sb.append("Name of the OS: " +
+            System.getProperty(nameOS));
+        sb.append("\n");
+        sb.append("Version of the OS: " +
+            System.getProperty(versionOS));
+        sb.append("\n");
+        sb.append("Architecture of The OS: " +
+            System.getProperty(architectureOS));
+        /* Total number of processors or cores available to the JVM */
+        sb.append("\n");
+        sb.append("Available processors: " +
+            Runtime.getRuntime().availableProcessors() + " cores");
+
+        sb.append("\n");
+        /* Total amount of free memory available to the JVM */
+        sb.append("Free memory: " +
+            Runtime.getRuntime().freeMemory() / (float) megabytes + " MB");
+
+        sb.append("\n");
+        /* This will return Long.MAX_VALUE if there is no preset limit */
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        /* Maximum amount of memory the JVM will attempt to use */
+        sb.append("Maximum memory: " +
+            (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory / (float) megabytes) + " MB");
+
+        sb.append("\n");
+        /* Total memory currently available to the JVM */
+        sb.append("Total memory available to JVM: " +
+            Runtime.getRuntime().totalMemory() / (float) megabytes + " MB");
+
+        return sb.toString();
+    }
+
+    private void _printOutput() {
+        String tab = "  ";
+        String result = "[\n" + tab + String.join(",\n" + tab, this.chart.ansPoints.stream().map(v -> v.toString()).collect(Collectors.toList())) + "\n]";
+        this.outputPane.setText(result);
     }
 
     private void _showFrame() {

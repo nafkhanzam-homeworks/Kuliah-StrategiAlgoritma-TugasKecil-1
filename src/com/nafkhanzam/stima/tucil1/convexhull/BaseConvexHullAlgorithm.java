@@ -15,4 +15,6 @@ public abstract class BaseConvexHullAlgorithm {
 
     public abstract List<Line> getResult();
 
+    public abstract String getComplexityString();
+
 }

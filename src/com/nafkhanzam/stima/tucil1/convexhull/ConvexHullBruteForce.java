@@ -31,6 +31,9 @@ public class ConvexHullBruteForce extends BaseConvexHullAlgorithm {
 				}
 
 				Point a = this.points.get(i), b = this.points.get(j);
+				if (a.equals(b)) {
+					continue;
+				}
 
 				// O(n)
 				if (_isLineValidForBeingTheVeryLeft(a, b)) {
@@ -40,7 +43,12 @@ public class ConvexHullBruteForce extends BaseConvexHullAlgorithm {
 		}
 
 		return res;
-    }
+	}
+	
+	@Override
+	public String getComplexityString() {
+		return "O(n^3)";
+	}
 
 	private boolean _isLineValidForBeingTheVeryLeft(Point a, Point b) {
 		for (int i = 0; i < this.points.size(); ++i) {
