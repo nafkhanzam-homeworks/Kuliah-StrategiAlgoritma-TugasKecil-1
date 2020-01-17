@@ -44,7 +44,7 @@ public class ConvexHullBruteForce extends BaseConvexHullAlgorithm {
 
 		return res;
 	}
-	
+
 	@Override
 	public String getComplexityString() {
 		return "O(n^3)";
